@@ -7,6 +7,7 @@ import (
 	"log"
 	"io/ioutil"
 	"strings"
+	"encoding/json"
 )
 
 var (
@@ -25,11 +26,11 @@ func main() {
 }
 
 func GetStockPicFromYahoo(stockSymbol string) {
-	url := "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_{stockSymbol}.tw&json=1&delay=0&_=1552123547443"
+	url := "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_{stockSymbol}.tw"
 	url = strings.Replace(url, "{stockSymbol}", stockSymbol, 1)
-	response, err := http.Get(url + stockSymbol)
+	response, err := http.Get(url)
 	if err != nil {
-		log.Fatalln("No such stock symbol: " + stockSymbol)
+		log.Fatalln("No such stock symbol: " + stockSymbol, ", Error: ", err)
 	}
 
 	body, err := ioutil.ReadAll(response.Body)
@@ -40,4 +41,9 @@ func GetStockPicFromYahoo(stockSymbol string) {
 	defer response.Body.Close()
 
 	fmt.Printf("%s\n", body)
+
+	var object interface{}
+	json.Unmarshal([]byte(body), &object)
+
+	fmt.Println(object)
 }
