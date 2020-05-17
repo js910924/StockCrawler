@@ -2,8 +2,19 @@ package main
 
 import (
 	"fmt"
+	"flag"
 )
 
+var (
+	stockSymbol string
+)
+
+func init() {
+	flag.StringVar(&stockSymbol, "s", "", "send stock symbol")
+}
+
 func main() {
-	fmt.Println("Hello World")
+	flag.Parse()
+
+	fmt.Println("Get stock symbol: " + stockSymbol)
 }
