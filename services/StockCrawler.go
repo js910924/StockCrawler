@@ -1,4 +1,4 @@
-package main
+package services
 
 import (
 	"encoding/json"
@@ -11,17 +11,17 @@ import (
 )
 
 type StockCrawler struct {
-	baseURL string
+	BaseURL string
 }
 
 func New(baseURL string) StockCrawler {
 	return StockCrawler{
-		baseURL: baseURL,
+		BaseURL: baseURL,
 	}
 }
 
 func (s *StockCrawler) GetStockInfo(stockSymbol string) GetStockInfoResponse {
-	url := strings.Replace(s.baseURL, "{stockSymbol}", stockSymbol, 1)
+	url := strings.Replace(s.BaseURL, "{stockSymbol}", stockSymbol, 1)
 	response, err := http.Get(url)
 	if err != nil {
 		log.Fatalln("No such stock symbol: "+stockSymbol, ", Error: ", err)

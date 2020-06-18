@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+
+	. "StockCrawler/services"
 )
 
 var (
@@ -18,7 +20,7 @@ func main() {
 
 	url := "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_{stockSymbol}.tw"
 	stockCrawler := StockCrawler{
-		baseURL: url,
+		BaseURL: url,
 	}
 
 	response := stockCrawler.GetStockInfo(stockSymbol)
