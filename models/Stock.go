@@ -1,5 +1,10 @@
 package models
 
+import (
+	"fmt"
+	"reflect"
+)
+
 type Stock struct {
 	// A                        string `json:"a"`
 	// B                        string `json:"b"`
@@ -38,4 +43,11 @@ type Stock struct {
 	// Ts                       string `json:"ts"`
 	// U                        string `json:"u"`
 	// W                        string `json:"w"`
+}
+
+func (s *Stock) ShowForm() {
+	name := reflect.Indirect(reflect.ValueOf(s))
+	for i := 0; i < name.NumField(); i++ {
+		fmt.Printf("%s %s\n", name.Type().Field(i).Name, name.Field(i).Interface())
+	}
 }
