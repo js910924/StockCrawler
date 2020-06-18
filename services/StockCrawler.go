@@ -14,12 +14,6 @@ type StockCrawler struct {
 	BaseURL string
 }
 
-func New(baseURL string) StockCrawler {
-	return StockCrawler{
-		BaseURL: baseURL,
-	}
-}
-
 func (s *StockCrawler) GetStockInfo(stockSymbol string) GetStockInfoResponse {
 	url := strings.Replace(s.BaseURL, "{stockSymbol}", stockSymbol, 1)
 	response, err := http.Get(url)
