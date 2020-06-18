@@ -39,61 +39,62 @@ func (s *StockCrawler) GetStockInfo(stockSymbol string) GetStockInfoResponse {
 }
 
 type GetStockInfoResponse struct {
-	CachedAlive int64  `json:"cachedAlive"`
-	ExKey       string `json:"exKey"`
-	MsgArray    []struct {
-		A     string `json:"a"`
-		B     string `json:"b"`
-		C     string `json:"c"`
-		Ch    string `json:"ch"`
-		D     string `json:"d"`
-		Ex    string `json:"ex"`
-		F     string `json:"f"`
-		Fv    string `json:"fv"`
-		G     string `json:"g"`
-		H     string `json:"h"`
-		I     string `json:"i"`
-		IP    string `json:"ip"`
-		It    string `json:"it"`
-		L     string `json:"l"`
-		Mt    string `json:"mt"`
-		N     string `json:"n"`
-		Nf    string `json:"nf"`
-		O     string `json:"o"`
-		Oa    string `json:"oa"`
-		Ob    string `json:"ob"`
-		Ot    string `json:"ot"`
-		Ov    string `json:"ov"`
-		Oz    string `json:"oz"`
-		P     string `json:"p"`
-		Ps    string `json:"ps"`
-		Pz    string `json:"pz"`
-		S     string `json:"s"`
-		T     string `json:"t"`
-		Tk0   string `json:"tk0"`
-		Tk1   string `json:"tk1"`
-		Tlong string `json:"tlong"`
-		Ts    string `json:"ts"`
-		Tv    string `json:"tv"`
-		U     string `json:"u"`
-		V     string `json:"v"`
-		W     string `json:"w"`
-		Y     string `json:"y"`
-		Z     string `json:"z"`
-	} `json:"msgArray"`
-	QueryTime struct {
-		SessionFromTime   int64  `json:"sessionFromTime"`
-		SessionKey        string `json:"sessionKey"`
-		SessionLatestTime int64  `json:"sessionLatestTime"`
-		SessionStr        string `json:"sessionStr"`
-		ShowChart         bool   `json:"showChart"`
-		StockInfo         int64  `json:"stockInfo"`
-		StockInfoItem     int64  `json:"stockInfoItem"`
-		SysDate           string `json:"sysDate"`
-		SysTime           string `json:"sysTime"`
-	} `json:"queryTime"`
-	Referer   string `json:"referer"`
-	Rtcode    string `json:"rtcode"`
+	// CachedAlive int64  `json:"cachedAlive"`
+	// ExKey       string `json:"exKey"`
+	Stocks []Stock `json:"msgArray"`
+	// QueryTime struct {
+	// 	SessionFromTime   int64  `json:"sessionFromTime"`
+	// 	SessionKey        string `json:"sessionKey"`
+	// 	SessionLatestTime int64  `json:"sessionLatestTime"`
+	// 	SessionStr        string `json:"sessionStr"`
+	// 	ShowChart         bool   `json:"showChart"`
+	// 	StockInfo         int64  `json:"stockInfo"`
+	// 	StockInfoItem     int64  `json:"stockInfoItem"`
+	// 	SysDate           string `json:"sysDate"`
+	// 	SysTime           string `json:"sysTime"`
+	// } `json:"queryTime"`
+	// Referer   string `json:"referer"`
+	// Rtcode    string `json:"rtcode"`
 	Rtmessage string `json:"rtmessage"`
-	UserDelay int64  `json:"userDelay"`
+	// UserDelay int64  `json:"userDelay"`
+}
+
+type Stock struct {
+	// A                        string `json:"a"`
+	// B                        string `json:"b"`
+	StockSymbol              string `json:"c"`
+	StockName                string `json:"n"`
+	CurrencyTransactionPrice string `json:"z"`
+	CurrentVolumn            string `json:"tv"`
+	OpeningPrice             string `json:"o"`
+	HighestPrice             string `json:"h"`
+	YesturdayClosePrice      string `json:"y"`
+	LowestPrice              string `json:"l"`
+	// Ch                       string `json:"ch"`
+	// D                        string `json:"d"`
+	// Ex                       string `json:"ex"`
+	// F                        string `json:"f"`
+	// Fv                       string `json:"fv"`
+	// G                        string `json:"g"`
+	// I                        string `json:"i"`
+	// IP                       string `json:"ip"`
+	// It                       string `json:"it"`
+	// Mt                       string `json:"mt"`
+	// Nf                       string `json:"nf"`
+	// Oa                       string `json:"oa"`
+	// Ob                       string `json:"ob"`
+	// Ot                       string `json:"ot"`
+	// Ov                       string `json:"ov"`
+	// Oz                       string `json:"oz"`
+	// P                        string `json:"p"`
+	// Ps                       string `json:"ps"`
+	// Pz                       string `json:"pz"`
+	// S                        string `json:"s"`
+	// T                        string `json:"t"`
+	// Tk0                      string `json:"tk0"`
+	// Tk1                      string `json:"tk1"`
+	// Tlong                    string `json:"tlong"`
+	// Ts                       string `json:"ts"`
+	// U                        string `json:"u"`
+	// W                        string `json:"w"`
 }

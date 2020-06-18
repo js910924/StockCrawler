@@ -20,5 +20,8 @@ func main() {
 	stockCrawler := StockCrawler{
 		baseURL: url,
 	}
-	fmt.Println(stockCrawler.GetStockInfo(stockSymbol))
+
+	response := stockCrawler.GetStockInfo(stockSymbol)
+	fmt.Println(response.Rtmessage)
+	fmt.Println(response.Stocks[0])
 }
