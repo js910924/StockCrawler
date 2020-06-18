@@ -2,7 +2,9 @@ package models
 
 import (
 	"fmt"
+	"log"
 	"reflect"
+	"strconv"
 )
 
 type Stock struct {
@@ -50,4 +52,20 @@ func (s *Stock) ShowForm() {
 	for i := 0; i < name.NumField(); i++ {
 		fmt.Printf("%s %s\n", name.Type().Field(i).Name, name.Field(i).Interface())
 	}
+
+	fmt.Printf("Percent %.3f%%\n", s.GetPercent())
+}
+
+func (s *Stock) GetPercent() float64 {
+	currenctPrice, err := strconv.ParseFloat(s.CurrencyTransactionPrice, 0)
+	if err != nil {
+		log.Fatalln("Parse fail")
+	}
+
+	openingPrice, err := strconv.ParseFloat(s.OpeningPrice, 0)
+	if err != nil {
+		log.Fatalln("Parse fail")
+	}
+
+	return (currenctPrice - openingPrice) / openingPrice * 100
 }
