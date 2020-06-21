@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
+	"net/http"
 
 	. "StockCrawler/services"
 )
@@ -17,14 +19,27 @@ func init() {
 
 func main() {
 	flag.Parse()
-
-	url := "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_{stockSymbol}.tw"
 	stockCrawler := StockCrawler{
-		BaseURL: url,
+		BaseURL: "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=tse_{stockSymbol}.tw",
 	}
 
-	response := stockCrawler.GetStockInfo(stockSymbol)
-	fmt.Println(response.Rtmessage)
-	fmt.Println(response.Stocks[0])
-	fmt.Println(response.Stocks[0].ShowForm())
+	if stockSymbol != "" {
+		response := stockCrawler.GetStockInfo(stockSymbol)
+		fmt.Printf("RtMessage: %s\n%s", response.Rtmessage, response.Stocks[0].ShowForm())
+		return
+	}
+
+	http.HandleFunc("/Stock", func(w http.ResponseWriter, r *http.Request) {
+		stockSymbol = r.URL.Query().Get("stockSymbol")
+		if stockSymbol == "" {
+			fmt.Fprintf(w, "can't string query string: stockSymbol")
+			return
+		}
+
+		response := stockCrawler.GetStockInfo(stockSymbol)
+
+		fmt.Fprintf(w, "RtMessage: %s\n%s", response.Rtmessage, response.Stocks[0].ShowForm())
+	})
+
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
