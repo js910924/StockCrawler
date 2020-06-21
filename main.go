@@ -26,5 +26,5 @@ func main() {
 	response := stockCrawler.GetStockInfo(stockSymbol)
 	fmt.Println(response.Rtmessage)
 	fmt.Println(response.Stocks[0])
-	response.Stocks[0].ShowForm()
+	fmt.Println(response.Stocks[0].ShowForm())
 }

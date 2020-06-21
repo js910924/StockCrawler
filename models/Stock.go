@@ -47,13 +47,15 @@ type Stock struct {
 	// W                        string `json:"w"`
 }
 
-func (s *Stock) ShowForm() {
+func (s *Stock) ShowForm() string {
 	name := reflect.Indirect(reflect.ValueOf(s))
+	form := ""
 	for i := 0; i < name.NumField(); i++ {
-		fmt.Printf("%s %s\n", name.Type().Field(i).Name, name.Field(i).Interface())
+		form += fmt.Sprintf("%s: %s\n", name.Type().Field(i).Name, name.Field(i).Interface())
 	}
 
-	fmt.Printf("Percent %.3f%%\n", s.GetPercent())
+	form += fmt.Sprintf("Percent: %.3f%%\n", s.GetPercent())
+	return form
 }
 
 func (s *Stock) GetPercent() float64 {
