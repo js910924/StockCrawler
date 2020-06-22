@@ -7,14 +7,17 @@ import (
 	"net/http"
 
 	. "StockCrawler/services"
+	. "StockCrawler/tools"
 )
 
 var (
 	stockSymbol string
+	isShowList  bool
 )
 
 func init() {
 	flag.StringVar(&stockSymbol, "s", "", "send stock symbol")
+	flag.BoolVar(&isShowList, "l", false, "show favorite stocks")
 }
 
 func main() {
@@ -26,6 +29,11 @@ func main() {
 	if stockSymbol != "" {
 		response := stockCrawler.GetStockInfo(stockSymbol)
 		fmt.Printf("RtMessage: %s\n%s", response.Rtmessage, response.Stocks[0].ShowForm())
+		return
+	}
+
+	if isShowList {
+		GetFavoriteStockList()
 		return
 	}
 
