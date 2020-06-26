@@ -29,7 +29,10 @@ func (s *StockCrawler) GetStockInfo(stockSymbol string) GetStockInfoResponse {
 	defer response.Body.Close()
 
 	var getStockInfoResponse GetStockInfoResponse
-	json.Unmarshal([]byte(body), &getStockInfoResponse)
+	err = json.Unmarshal(body, &getStockInfoResponse)
+	if err != nil {
+		log.Panicln(string(body))
+	}
 
 	return getStockInfoResponse
 }
