@@ -29,3 +29,7 @@ func Stock(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Fprintf(w, "%s", response.Stocks[0].ShowForm())
 }
+
+func List(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "2324 仁寶\n2317 鴻海\n2330 台積電\n2637 慧洋-KY\n")
+}

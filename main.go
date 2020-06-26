@@ -28,6 +28,7 @@ func main() {
 	r := http.NewServeMux()
 
 	r.HandleFunc("/Stock", handlers.Stock)
+	r.HandleFunc("/List", handlers.List)
 
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
