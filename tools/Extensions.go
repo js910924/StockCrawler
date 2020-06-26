@@ -8,9 +8,11 @@ import (
 )
 
 func GetFavoriteStockList() {
-	if err := recover(); err != nil {
-	}
-	defer CreateFile("favoriteList.txt")
+	defer func() {
+		if err := recover(); err != nil {
+			CreateFile("favoriteList.txt")
+		}
+	}()
 
 	file, err := os.Open("favoriteList.txt")
 	if err != nil {
